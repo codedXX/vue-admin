@@ -114,6 +114,8 @@ export default {
     ["common-layouts"]: "common layouts",
     ["data-screen"]: "data screen",
     ["thin-preview"]: "thin preview",
+    ["threeDimensional"]: "threeDimensional",
+    ["kkPark"]: "kkPark",
     ["test"]: "test"
   }
 };

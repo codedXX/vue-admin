@@ -30,6 +30,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   routeTree: () => []
 });
+console.log("props", props);
 
 const { menuShow, aMenuShow } = useMenuMethod();
 </script>

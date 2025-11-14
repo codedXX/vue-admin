@@ -114,6 +114,8 @@ export default {
     ["common-layouts"]: "常用布局",
     ["data-screen"]: "数据大屏",
     ["thin-preview"]: "极简版预览",
+    ["threeDimensional"]: "三维",
+    ["kkPark"]: "kk园区",
     ["test"]: "测试"
   }
 };

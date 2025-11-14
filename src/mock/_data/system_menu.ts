@@ -1761,7 +1761,50 @@ export const systemMenu = [
       type: 2
     },
     children: null
-  }
+  },{
+    id: "19",
+    parentId: "0",
+    path: "/threeDimensional",
+    name: "threeDimensional",
+    redirect: "/threeDimensional/kkPark",
+    meta: {
+      title: "threeDimensional",
+      hide: false,
+      disable: false,
+      keepAlive: false,
+      affix: false,
+      link: "",
+      iframe: false,
+      isFull: false,
+      roles: ["admin", "common"],
+      svgIcon: "about",
+      sort: 19,
+      type: 1
+    },
+    children: null
+  },
+  {
+    id: "1901",
+    parentId: "19",
+    path: "/threeDimensional/kkPark",
+    name: "kkPark",
+    component: "threeDimensional/kkPark/index",
+    meta: {
+      title: "kkPark",
+      hide: false,
+      keepAlive: false,
+      disable: false,
+      affix: false,
+      link: "",
+      iframe: false,
+      isFull: true,
+      roles: ["admin"],
+      icon: "icon-menu",
+      sort: 1,
+      type: 2
+    },
+    children: null
+  },
 ];
 
 // 权限数据
