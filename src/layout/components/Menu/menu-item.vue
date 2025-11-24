@@ -20,17 +20,19 @@
 import MenuItem from "@/layout/components/Menu/menu-item.vue";
 import MenuItemIcon from "@/layout/components/Menu/menu-item-icon.vue";
 import { useMenuMethod } from "@/hooks/useMenuMethod";
+
 defineOptions({ name: "MenuItem", inheritAttrs: false });
 
 interface Props {
   routeTree: Menu.MenuOptions[];
 }
+
 // props的数据类型
 // type类型参考：https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props
 const props = withDefaults(defineProps<Props>(), {
   routeTree: () => []
 });
-console.log("props", props);
+// console.log("props", props);
 
 const { menuShow, aMenuShow } = useMenuMethod();
 </script>
