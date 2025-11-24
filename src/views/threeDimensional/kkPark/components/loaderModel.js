@@ -49,6 +49,12 @@ export default class LoaderModel {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         //设置渲染器的像素比例
         this.renderer.setPixelRatio(window.devicePixelRatio);
+
+        // ★★★ 关键修改：更新 CSS3D 渲染器尺寸 ★★★
+        // 如果没有这一步，CSS3D的内容在窗口改变时不会重绘或定位错误
+        if (this.css3DRenderer) {
+          this.css3DRenderer.setSize(window.innerWidth, window.innerHeight);
+        }
       });
 
       //初始化控制器
@@ -109,20 +115,30 @@ export default class LoaderModel {
 
   addText(option) {
     let list = [];
-    if (Array.isArray(option))
-      list = option; // 支持批量添加
-    else list.push(option); // 单个对象转为数组
+    if (Array.isArray(option)) list = option;
+    else list.push(option);
 
     list.forEach(e => {
-      //insertAdjacentHTML - 将 HTML 插入到页面中，"beforeend" 表示插入到 body 的末尾
-      document.body.insertAdjacentHTML("beforeend", e.element);
-      // 创建 CSS3D 对象
-      const label = new e.cssObject(document.body.lastChild);
-      label.userData.isCss23D = true; // 设置用户数据和属性
-      label.position.set(...e.position); // 设置 3D 位置
-      label.name = e.name; // 设置名称
-      if (e.scale) label.scale.set(...e.scale); // 设置缩放
-      e.parent ? e.parent.add(label) : this.scene.add(label); // 添加到场景
+      // 1. 创建 DOM 元素
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = e.element;
+      // 我们需要传入 CSS3DSprite 能够引用的元素
+      const element = wrapper.firstElementChild; // 获取到实际的 div.floorText-3d
+
+      if (!element) return; // 安全检查
+
+      // 2. 将元素添加到 CSS3DRenderer 的 DOM 中，由 Three.js 接管
+      this.css3DRenderer.domElement.appendChild(element);
+
+      // 3. 创建 CSS3D 对象并引用这个 DOM 元素
+      const label = new e.cssObject(element); // 使用 element，而不是 document.body.lastChild
+      label.userData.isCss23D = true;
+      label.position.set(...e.position);
+      label.name = e.name;
+      if (e.scale) label.scale.set(...e.scale);
+
+      // 4. 将 CSS3D 对象添加到 Three.js 场景中，使其参与渲染循环
+      e.parent ? e.parent.add(label) : this.scene.add(label);
     });
   }
 
