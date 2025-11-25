@@ -26,13 +26,17 @@ onMounted(async () => {
   height: 100vh;
 }
 
+// 👇 核心修改：括号内加空格（SCSS 解析友好，Vue3 无警告）
+// :deep( .floorText-3d ) {
+//  font-size: 2px;
+//  color: white;
+//  cursor: pointer;
+// }
 </style>
 <style>
 .floorText-3d {
-  //width: 10px;
-  //height: 5px;
-  font-size: 4px;
+  font-size: 2px;
   color: white;
-  //background: red;
+  cursor: pointer;
 }
 </style>

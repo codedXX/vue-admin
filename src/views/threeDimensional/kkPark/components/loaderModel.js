@@ -71,6 +71,7 @@ export default class LoaderModel {
         console.log("gltf", gltf);
         this.scene.add(gltf.scene);
         gltf.scene.traverse(obj => {
+          console.log("obj", obj);
           if (obj.name.indexOf("楼顶") > -1) {
             const name = obj.parent.name;
             let position = Object.values(this.getModelWorldPosition(obj));
@@ -84,6 +85,12 @@ export default class LoaderModel {
               scale: [1, 1, 1] // 暂时调整为1，看是否出现
               // 不传parent，直接添加到场景
             });
+
+            let floorText = document.querySelector(".floorText-3d");
+            floorText.addEventListener("click", function () {
+              console.log("你好");
+            });
+            console.log("试一下", document.querySelector(".floorText-3d"));
           }
         });
       });
